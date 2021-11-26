@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <cs50.h>
+
+long postive_number(void);
+
+int main(void)
+{
+    long card = postive_number();
+    int leng = 0;
+    int checksum = 0;
+    int checksum1 = 0;
+    long cardtemp=card/10;
+
+   while (cardtemp>0)
+   {
+        if (((cardtemp%10)*2)>9)
+        {
+            int temp = (cardtemp%10)*2;
+
+            checksum = checksum + (temp % 10);
+            checksum = checksum + (temp / 10);
+
+            temp = 0;
+        }
+        else
+        {
+            checksum = checksum + ((cardtemp%10)*2);
+        }
+
+        cardtemp = cardtemp/100;
+
+    }
+
+cardtemp = card;
+
+    while (cardtemp>0)
+    {
+        checksum1 = checksum1 + (cardtemp%10);
+        cardtemp=cardtemp/100;
+    }
+
+cardtemp = card;
+
+        while (cardtemp>0)
+    {
+        leng++;
+        cardtemp=cardtemp/10;
+    }
+
+
+int finalcheck = checksum+checksum1;
+cardtemp = card;
+
+for (int i=0; i<leng-1;i++)
+{
+    cardtemp=cardtemp/10;
+}
+
+if (finalcheck%10 == 0)
+
+{
+    if (leng == 15 && cardtemp == 3)
+    {
+        printf ("Number: %ld\n AMEX \n" ,card);
+    }
+
+    else if ( leng == 16 && cardtemp == 5 )
+    {
+        printf ("Number: %ld\n MASTERCARD \n" ,card);
+    }
+    else if (leng==14 || leng==16)
+    {
+        if (cardtemp==4)
+        {
+            printf ("Number: %ld\n VISA \n" ,card);
+        }
+    }
+
+}
+else
+{
+    printf ("Number: %ld\n INVALID \n" ,card);
+}
+
+}
+
+long postive_number(void)
+{
+
+    long card;
+    do{
+        card = get_long("Enter your card Number ");
+    }while(card<0);
+
+    return card;
+
+}
