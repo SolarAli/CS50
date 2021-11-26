@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <cs50.h>
+
+int get_integer18(void);
+
+int main(void)
+{
+
+     //define Integer to make
+    int n = get_integer18();
+
+   printf("Integer is %i\n",n);
+
+   for (int i=1; i<n+1; i++)
+   {
+       for (int k=(n-i);k>0;k--)
+       {
+           printf(" ");
+       }
+
+       for (int j=0; j<i; j++ )
+       {
+           printf ("x");
+       }
+       printf (" ");
+       for (int l=0;l<i;l++)
+       {
+            printf ("x");
+       }
+       printf("\n");
+   }
+}
+
+int get_integer18(void)
+{
+    int n;
+    do{
+
+        n = get_int("Enter a Integer Between 1-8: ");
+
+    } while (n<1 || n>8);
+
+   return n;
+}
